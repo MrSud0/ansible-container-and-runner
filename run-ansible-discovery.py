@@ -26,15 +26,15 @@ def run_ansible_playbook(working_directory, primary_script, playbooks, inventory
     client = docker.from_env()
 
     volumes = {
-        os.path.join(working_directory, primary_script): {'bind': '/home/discovery/ansible-runner.py', 'mode': 'ro'},
-        os.path.join(working_directory, inventory_path): {'bind': '/home/discovery/inventory.ini', 'mode': 'ro'},
+        os.path.join(working_directory, primary_script): {'bind': '/home/ansible/ansible-runner.py', 'mode': 'ro'},
+        os.path.join(working_directory, inventory_path): {'bind': '/home/ansible/inventory.ini', 'mode': 'ro'},
         os.path.abspath(results_dir): {'bind': '/tmp', 'mode': 'rw'}
     }
     
     for playbook in playbooks:
-        volumes[os.path.join(working_directory, playbook)] = {'bind': f'/home/discovery/{Path(playbook).name}', 'mode': 'ro'}
+        volumes[os.path.join(working_directory, playbook)] = {'bind': f'/home/ansible/{Path(playbook).name}', 'mode': 'ro'}
 
-    command = ["python3", "/home/discovery/ansible-runner.py"]
+    command = ["python3", "/home/ansible/ansible-runner.py"]
 
     if extra_vars:
         command.extend(["--extra-vars", extra_vars])
@@ -70,9 +70,9 @@ if __name__ == "__main__":
     run_parser = subparsers.add_parser("run", help="Run mode to execute an Ansible playbook")
     run_parser.add_argument("--working-directory", default=".", help="Working directory for all files (default: current directory)")
     run_parser.add_argument("--primary-script", default="ansible-runner.py", help="Path to the primary script to run (default: ansible-runner.py)")
-    run_parser.add_argument("--playbooks", nargs='+', default=["disLin.yml", "disWin.yml"], help="Paths to the Ansible playbooks to load (default: disLin.yml disWin.yml)")
+    run_parser.add_argument("--playbooks", nargs='+', default=["playbook1.yml", "playbook2.yml"], help="Paths to the Ansible playbooks to load ")
     run_parser.add_argument("--inventory", default="inventory.ini", help="Path to the inventory file to use (default: inventory.ini)")
-    run_parser.add_argument("--results-dir", default="/home/env-admin/asset_discovery_tool/results", help="Directory to save the results file (default: /home/env-admin/asset_discovery_tool/results)")
+    run_parser.add_argument("--results-dir", default="./results", help="Directory to save the results file ")
     run_parser.add_argument("--extra-vars", help="Additional variables to pass to the playbook")
     
     args = parser.parse_args()
