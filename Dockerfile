@@ -29,7 +29,7 @@ RUN echo "LC_ALL=en_US.UTF-8" >> /etc/environment && \
     locale-gen en_US.UTF-8
 
 # Create Ansible user with sudo privileges
-ARG USERNAME=discovery
+ARG USERNAME=ansible
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 ENV HOME=/home/$USERNAME
