@@ -74,7 +74,7 @@ def main():
     parser.add_argument('--unix_hosts_file', type=str, default='unix_hosts.txt', help='Path to the UNIX hosts file (default: unix_hosts.txt)')
     parser.add_argument('--win_hosts_file', type=str, default='win_hosts.txt', help='Path to the Windows hosts file (default: win_hosts.txt)')
     parser.add_argument('--ssh_hosts_file', type=str, default='ssh_hosts.txt', help='Path to the SSH hosts file (default: ssh_hosts.txt)')
-    parser.add_argument('--ansible_user', type=str, default='discovery', help='Ansible user name (default: discovery)')
+    parser.add_argument('--ansible_user', type=str, default='ansible', help='Ansible user name (default: ansible)')
     parser.add_argument('--ansible_password', type=str, default='ComplexPassw0rd!', help='Ansible password (default: ComplexPassw0rd!)')
     parser.add_argument('--ansible_port', type=int, default=22, help='Ansible SSH port (default: 22)')
     parser.add_argument('--ssh_private_key', type=str, default='ansible_key', help='Path to the SSH private key file (default: ansible_key)')
